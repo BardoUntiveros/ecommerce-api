@@ -13,6 +13,9 @@ export class AppController {
     description: 'Ok - Returns default message',
   })
   getHello(): string {
+    console.log(process.env.SERVER_PORT);
+    console.log(process.env.POSTGRES_HOST);
+    console.log(process.env.POSTGRES_DB);
     return this.appService.getDefaultMessage();
   }
 }
