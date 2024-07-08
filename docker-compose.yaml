@@ -1,0 +1,20 @@
+services:
+  postgresdb:
+    image: postgres:16.3
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    env_file:
+      - env/.docker.env
+
+  ecommerce-bardo-untiveros:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - postgresdb
+    env_file:
+      - env/.docker.env
