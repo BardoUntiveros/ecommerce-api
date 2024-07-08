@@ -16,8 +16,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         password: configService.get<string>('POSTGRES_PASSWORD'),
         entities: ['dist/**/*.entity{.ts,.js}'],
         logging: true, // Only for development, should be false in production
-        synchronize: true, // Only for development, should be false in production
-        dropSchema: true, // Only for development, should be false in production
+        synchronize: false, // Only for development, should be false in production
+        dropSchema: false, // Only for development, should be false in production
         migrations: ['src/migrations/*{.ts,.js}'],
       }),
     }),
