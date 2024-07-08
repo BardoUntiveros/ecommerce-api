@@ -12,7 +12,7 @@ import { Order } from './orders.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { GetOrderDto } from './dto/get-order.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Orders')
 @Controller('orders')
@@ -48,6 +48,7 @@ export class OrdersController {
 
   @UseGuards(AuthGuard)
   @Post()
+  @ApiBearerAuth()
   @ApiResponse({
     status: 201,
     description: 'Created - Returns created order',
