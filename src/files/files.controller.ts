@@ -12,7 +12,13 @@ import { FilesService } from './files.service';
 import { File } from './files.entity';
 import { GetProductDto } from '../products/dto/get-product.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Files')
 @Controller('files')
@@ -23,6 +29,22 @@ class FilesController {
   // :id -> Product id
   @Post('upload-image/:id')
   @UseInterceptors(FileInterceptor('file'))
+  @ApiBearerAuth()
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'File upload',
+    type: 'multipart/form-data',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+      required: ['file'],
+    },
+  })
   @ApiResponse({
     status: 201,
     description: 'Created - Returns created file',
