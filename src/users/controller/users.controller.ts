@@ -23,6 +23,7 @@ import { RolesGuard } from '../../roles/roles.guard';
 import {
   ApiBearerAuth,
   ApiBody,
+  ApiOperation,
   ApiParam,
   ApiResponse,
   ApiTags,
@@ -41,6 +42,7 @@ export class UsersController {
   @Get()
   @HttpCode(206)
   @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get all users (admin role required)' })
   @ApiResponse({
     status: 206,
     description:
@@ -64,6 +66,7 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Get(':id')
+  @ApiOperation({ summary: 'Get user by id' })
   @ApiParam({
     name: 'id',
     type: String,
@@ -93,6 +96,7 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Put(':id')
+  @ApiOperation({ summary: 'Update user by id' })
   @ApiParam({
     name: 'id',
     type: String,
@@ -127,6 +131,7 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete user by id' })
   @ApiResponse({
     status: 204,
     description: 'Returns no content',

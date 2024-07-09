@@ -20,7 +20,7 @@ import { PaginationDto } from '../pagination/pagination.dto';
 import { PaginationService } from '../pagination/service/pagination.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../roles/roles.guard';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../roles/roles.decorator';
 import { RoleName } from '../roles/roles.enum';
 
@@ -34,6 +34,7 @@ export class ProductsController {
 
   @Get()
   @HttpCode(206)
+  @ApiOperation({ summary: 'Get all products' })
   @ApiResponse({
     status: 206,
     description:
@@ -53,6 +54,7 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get product by id' })
   @ApiResponse({
     status: 200,
     description: 'Ok - Returns a product',
@@ -70,6 +72,7 @@ export class ProductsController {
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create a product' })
   @ApiResponse({
     status: 201,
     description: 'Partial content - Returns created product',
@@ -85,6 +88,7 @@ export class ProductsController {
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(RoleName.ADMIN)
   @Put(':id')
+  @ApiOperation({ summary: 'Update product by id' })
   @ApiResponse({
     status: 200,
     description: 'Ok - Returns updated product',
@@ -110,6 +114,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete product by id' })
   @ApiResponse({
     status: 204,
     description: 'Created - Returns no content',
@@ -132,6 +137,7 @@ export class ProductsController {
   }
 
   @Post('seeder')
+  @ApiOperation({ summary: 'Create predefined products' })
   @ApiResponse({
     status: 204,
     description: 'Created - Returns no content',

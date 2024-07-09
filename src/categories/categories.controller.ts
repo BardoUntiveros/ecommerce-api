@@ -11,7 +11,7 @@ import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { GetCategoryDto } from './dto/get-category.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -19,6 +19,7 @@ class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Get all categories' })
   @ApiResponse({
     status: 200,
     description: 'Ok -  Returns array of categories',
@@ -28,6 +29,7 @@ class CategoriesController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get category by id' })
   @ApiResponse({
     status: 200,
     description: 'Ok - Returns a category',
@@ -45,6 +47,7 @@ class CategoriesController {
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create a category' })
   @ApiResponse({
     status: 201,
     description: 'Created - Returns created category',
@@ -58,6 +61,7 @@ class CategoriesController {
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update category by id' })
   @ApiResponse({
     status: 200,
     description: 'Ok - Returns updated category',
@@ -81,6 +85,7 @@ class CategoriesController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete category by id' })
   @ApiResponse({
     status: 204,
     description: 'Deleted - Returns no content',
@@ -98,6 +103,7 @@ class CategoriesController {
   }
 
   @Post('seeder')
+  @ApiOperation({ summary: 'Create predefined categories' })
   @ApiResponse({
     status: 201,
     description: 'Created - Returns no content',

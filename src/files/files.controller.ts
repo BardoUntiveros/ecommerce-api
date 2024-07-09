@@ -16,6 +16,7 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiConsumes,
+  ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -30,6 +31,7 @@ class FilesController {
   @Post('upload-image/:id')
   @UseInterceptors(FileInterceptor('file'))
   @ApiBearerAuth()
+  @ApiOperation({ summary: 'Upload image to a product by id' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'File upload',

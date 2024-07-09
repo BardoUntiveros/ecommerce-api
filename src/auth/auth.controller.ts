@@ -3,8 +3,7 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signin.dto';
 import { User } from '../users/users.entity';
 import { SignupDto } from './dto/signup.dto';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ISignInRequest } from './auth.types';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -13,6 +12,7 @@ export class AuthController {
 
   @Post('signin')
   @HttpCode(200)
+  @ApiOperation({ summary: 'Sign in a user getting authorization token' })
   @ApiBody({ type: SignInDto, description: 'Sign in payload' })
   @ApiResponse({
     status: 200,
@@ -27,6 +27,7 @@ export class AuthController {
   }
 
   @Post('signup')
+  @ApiOperation({ summary: 'Create a user' })
   @ApiBody({ type: SignupDto, description: 'Sign up payload' })
   @ApiResponse({
     status: 201,
