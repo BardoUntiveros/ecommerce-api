@@ -9,11 +9,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('POSTGRES_HOST'),
-        port: configService.get<number>('POSTGRES_PORT'),
-        database: configService.get<string>('POSTGRES_DB'),
-        username: configService.get<string>('POSTGRES_USER'),
-        password: configService.get<string>('POSTGRES_PASSWORD'),
+        host: process.env.POSTGRES_HOST,
+        port: parseInt(process.env.POSTGRES_PORT, 10),
+        database: process.env.POSTGRES_DB,
+        username: process.env.POSTGRES_USER,
+        password: process.env.POSTGRES_PASSWORD,
         entities: ['dist/**/*.entity{.ts,.js}'],
         logging: true, // Only for development, should be false in production
         synchronize: false, // Only for development, should be false in production

@@ -7,8 +7,7 @@ dotenv.config();
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath:
-        process.env.NODE_ENV !== 'production' ? 'env/.local.env' : undefined,
+      envFilePath: '.env',
       isGlobal: true,
     }),
   ],
